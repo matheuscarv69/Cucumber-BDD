@@ -6,8 +6,9 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/main/resources/features/Locadora.feature",
+        features = "src/main/resources/features/AlugarFilme.feature",
         glue = "",
+        tags = ("not @ignore"),
         plugin = {"pretty", "html:target/cucumber"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
 
