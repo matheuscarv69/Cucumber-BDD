@@ -2,6 +2,7 @@ package steps;
 
 import entities.Filme;
 import entities.NotaAluguel;
+import entities.enums.TipoAluguel;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
@@ -11,6 +12,7 @@ import services.AluguelService;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static helpers.DateMethods.calcularDataEntrega;
 import static helpers.DateMethods.sdfFormater;
@@ -71,9 +73,10 @@ public class AlugarFilmeStep {
         Assert.assertTrue(errors.contains("O filme não tem estoque"));
     }
 
-    @Dado("que o tipo de aluguel seja (extendido|comum)$")
+    @Dado("que o tipo de aluguel seja (extendido|comum|semanal)$")
     public void queOTipoDeAluguelSeja(String tipo) {
-        notaAluguel.setTipoAluguel(tipo);
+        TipoAluguel tipoAluguel = TipoAluguel.valueOf(tipo.toUpperCase());
+        notaAluguel.setTipoAluguel(tipoAluguel);
     }
 
     @Então("a pontuação recebida será de {int} ponto(s)")

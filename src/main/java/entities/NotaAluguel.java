@@ -1,5 +1,7 @@
 package entities;
 
+import entities.enums.TipoAluguel;
+
 import java.util.Date;
 
 public class NotaAluguel {
@@ -8,14 +10,14 @@ public class NotaAluguel {
     private Integer diasAlugados;
     private Date dataEntrega;
     private Double precoAluguelFinal;
-    private String tipoAluguel = "comum";
+    private TipoAluguel tipoAluguel = TipoAluguel.COMUM;
     private Integer pontuacao;
 
     public NotaAluguel() {
 
     }
 
-    public NotaAluguel(Filme filme, Integer diasAlugados, Date dataEntrega, Double precoAluguelFinal, String tipoAluguel, Integer pontuacao) {
+    public NotaAluguel(Filme filme, Integer diasAlugados, Date dataEntrega, Double precoAluguelFinal, TipoAluguel tipoAluguel, Integer pontuacao) {
         this.filme = filme;
         this.diasAlugados = diasAlugados;
         this.dataEntrega = dataEntrega;
@@ -56,19 +58,20 @@ public class NotaAluguel {
         this.precoAluguelFinal = precoAluguelFinal;
     }
 
-    public String getTipoAluguel() {
+    public TipoAluguel getTipoAluguel() {
         return tipoAluguel;
     }
 
-    public void setTipoAluguel(String tipoAluguel) {
+    public void setTipoAluguel(TipoAluguel tipoAluguel) {
         this.tipoAluguel = tipoAluguel;
+    }
+
+    public void setPontuacao(Integer pontuacao) {
+        this.pontuacao = pontuacao;
     }
 
     public Integer getPontuacao() {
         return pontuacao;
     }
 
-    public void setPontuacao(int pontuacao) {
-        this.pontuacao = pontuacao;
-    }
 }

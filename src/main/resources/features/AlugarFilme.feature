@@ -19,20 +19,20 @@ Funcionalidade: Cadastrar Aluguéis
     Então não será possível por falta de estoque
     E o estoque do filme será 0 unidade
 
-  Cenário: Deve dar condições especiais para categoria extendida
+  Esquema do Cenário: Deve dar condições conforme tipo de aluguel
     Dado um filme com estoque de 2 unidades
-    E que o preço de aluguel seja R$ 4
-    E que o tipo de aluguel seja extendido
-    Quando alugar por 3 dias
-    Então o preço do aluguel será R$ 8
-    E a data de entrega será em 3 dias
-    E a pontuação recebida será de 2 pontos
-    
-  Cenário: Deve alugar um filme para a categoria comum
-    Dado um filme com estoque de 2 unidades
-    E que o preço de aluguel seja R$ 4
-    E que o tipo de aluguel seja comum
-    Quando alugar por 1 dias
-    Então o preço do aluguel será R$ 4
-    E a data de entrega será em 1 dia
-    E a pontuação recebida será de 1 ponto
+    E que o preço de aluguel seja R$ <preco>
+    E que o tipo de aluguel seja <tipo>
+    Quando alugar por <qtdDias> dias
+    Então o preço do aluguel será R$ <precoFinal>
+    E a data de entrega será em <qtdDias> dias
+    E a pontuação recebida será de <pontuacao> pontos
+
+    Exemplos:
+      | preco | tipo      | qtdDias | precoFinal | pontuacao |
+      | 4     | extendido | 3       | 8          | 2         |
+      | 4     | comum     | 1       | 4          | 1         |
+      | 10    | extendido | 3       | 20         | 2         |
+      | 5     | semanal   | 7       | 15         | 3         |
+
+

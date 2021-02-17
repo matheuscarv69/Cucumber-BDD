@@ -2,6 +2,7 @@ package services;
 
 import entities.Filme;
 import entities.NotaAluguel;
+import entities.enums.TipoAluguel;
 
 import static helpers.DateMethods.calcularDataEntrega;
 
@@ -19,12 +20,20 @@ public class AluguelService {
             nota.setFilme(filme);
             nota.setDiasAlugados(diasAlugados);
 
-            if(nota.getTipoAluguel().equals("extendido")){
-                nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * (diasAlugados - 1));
-                nota.setPontuacao(2);
-            }else if(nota.getTipoAluguel().equals("comum")){
-                nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * diasAlugados);
-                nota.setPontuacao(1);
+            switch (nota.getTipoAluguel()) {
+                case SEMANAL:
+                    nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * (diasAlugados - 4));
+                    nota.setPontuacao(3);
+                    break;
+                case EXTENDIDO:
+                    nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * (diasAlugados - 1));
+                    nota.setPontuacao(2);
+                    break;
+                case COMUM:
+                default:
+                    nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * diasAlugados);
+                    nota.setPontuacao(1);
+                    break;
             }
 
             nota.setDataEntrega(calcularDataEntrega(diasAlugados));
