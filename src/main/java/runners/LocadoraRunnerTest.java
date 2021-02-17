@@ -7,12 +7,12 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/main/resources/features/AlugarFilme.feature",
-        glue = "",
-        tags = ("not @ignore"),
-        plugin = {"pretty", "html:target/report-tests.html"},
+        glue = ".steps",
+        tags = (""),
+        plugin = {"pretty", "html:target/tests-report.html"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
 
 )
-public class LocadoraRunner {
+public class LocadoraRunnerTest {
 
 }
