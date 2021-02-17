@@ -8,8 +8,9 @@ import io.cucumber.java.pt.Quando;
 import org.junit.Assert;
 import services.AluguelService;
 
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static helpers.DateMethods.calcularDataEntrega;
 import static helpers.DateMethods.sdfFormater;
@@ -21,6 +22,8 @@ public class AlugarFilmeStep {
 
     private Filme filme;
     private NotaAluguel notaAluguel;
+
+    private List<String> errors = new ArrayList<>();
 
     @Dado("um filme com estoque de {int} unidades")
     public void umFilmeComEstoqueDeUnidades(Integer estoque) {
@@ -37,7 +40,11 @@ public class AlugarFilmeStep {
 
     @Quando("alugar por {int} dia(s)")
     public void alugar(Integer dias) {
-        notaAluguel = aluguelService.alugar(filme, dias);
+        try{
+            notaAluguel = aluguelService.alugar(filme, dias);
+        }catch (RuntimeException e){
+            errors.add(e.getMessage());
+        }
     }
 
     @Então("^o preço do aluguel será R\\$ (.*)$")
@@ -70,7 +77,7 @@ public class AlugarFilmeStep {
 
     @Então("não será possível por falta de estoque")
     public void nãoSeráPossívelPorFaltaDeEstoque() {
-        // Write code here that turns the phrase above into concrete actions
+        Assert.assertTrue(errors.contains("O filme não tem estoque"));
     }
 
     @Então("a pontuação recebida será de {int} pontos")

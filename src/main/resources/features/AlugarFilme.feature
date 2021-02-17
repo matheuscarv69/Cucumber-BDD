@@ -13,10 +13,9 @@ Funcionalidade: Cadastrar Aluguéis
     E a data de entrega será no dia seguinte
     E o estoque do filme será 1 unidade
 
-  @ignore
   Cenário: Não deve alugar um filme sem estoque
     Dado um filme com estoque de 0 unidades
-    Quando alugar
+    Quando alugar por 1 dia
     Então não será possível por falta de estoque
     E o estoque do filme será 0 unidade
 
