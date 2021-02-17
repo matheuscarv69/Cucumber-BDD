@@ -10,7 +10,7 @@ Funcionalidade: Cadastrar Aluguéis
     E que o preço de aluguel seja R$ 3
     Quando alugar por 1 dia
     Então o preço do aluguel será R$ 3
-    E a data de entrega será no dia seguinte
+    E a data de entrega será em 1 dia
     E o estoque do filme será 1 unidade
 
   Cenário: Não deve alugar um filme sem estoque
@@ -19,11 +19,11 @@ Funcionalidade: Cadastrar Aluguéis
     Então não será possível por falta de estoque
     E o estoque do filme será 0 unidade
 
-  @ignore
   Cenário: Deve dar condições especiais para categoria extendida
     Dado um filme com estoque de 2 unidades
     E que o preço de aluguel seja R$ 4
-    Quando alugar
-    Então o preço do aluguel será R$ 8
-    E a data de entrega será em 3 dias
+    E que o tipo de aluguel seja extendido
+    Quando alugar por 4 dias
+    Então o preço do aluguel será R$ 12
+    E a data de entrega será em 4 dias
     E a pontuação recebida será de 2 pontos

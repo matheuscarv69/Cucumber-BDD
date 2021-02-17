@@ -21,7 +21,7 @@ public class AlugarFilmeStep {
     private AluguelService aluguelService;
 
     private Filme filme;
-    private NotaAluguel notaAluguel;
+    private NotaAluguel notaAluguel = new NotaAluguel();
 
     private List<String> errors = new ArrayList<>();
 
@@ -40,9 +40,9 @@ public class AlugarFilmeStep {
 
     @Quando("alugar por {int} dia(s)")
     public void alugar(Integer dias) {
-        try{
-            notaAluguel = aluguelService.alugar(filme, dias);
-        }catch (RuntimeException e){
+        try {
+            notaAluguel = aluguelService.alugar(filme, dias, notaAluguel);
+        } catch (RuntimeException e) {
             errors.add(e.getMessage());
         }
     }
@@ -55,19 +55,10 @@ public class AlugarFilmeStep {
         Assert.assertEquals(preco, notaAluguel.getPrecoAluguelFinal());
     }
 
-    /**
-     * Tentar unificar os dois métodos
-     **/
-    @Então("a data de entrega será no dia seguinte")
-    public void aDataDeEntregaSeráNoDiaSeguinte() {
-        Date dataEntregaEsperada = calcularDataEntrega(notaAluguel.getDiasAlugados());
-
+    @Então("a data de entrega será em {int} dia(s)")
+    public void aDataDeEntregaSeráEmDias(Integer diasAlugados) {
+        Date dataEntregaEsperada = calcularDataEntrega(diasAlugados);
         Assert.assertEquals(sdfFormater(dataEntregaEsperada), sdfFormater(notaAluguel.getDataEntrega()));
-    }
-
-    @Então("a data de entrega será em {int} dias")
-    public void aDataDeEntregaSeráEmDias(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
     }
 
     @Então("o estoque do filme será {int} unidade")
@@ -80,9 +71,15 @@ public class AlugarFilmeStep {
         Assert.assertTrue(errors.contains("O filme não tem estoque"));
     }
 
-    @Então("a pontuação recebida será de {int} pontos")
-    public void aPontuaçãoRecebidaSeráDePontos(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
+    @Dado("que o tipo de aluguel seja extendido")
+    public void queOTipoDeAluguelSejaExtendido() {
+        notaAluguel.setTipoAluguel("Extendido");
     }
+
+    @Então("a pontuação recebida será de {int} pontos")
+    public void aPontuaçãoRecebidaSeráDePontos(Integer pontuacao) {
+        Assert.assertEquals(pontuacao, notaAluguel.getPontuacao());
+    }
+
 
 }

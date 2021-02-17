@@ -7,8 +7,8 @@ import static helpers.DateMethods.calcularDataEntrega;
 
 public class AluguelService {
 
-    public static NotaAluguel alugar(Filme filme, Integer diasAlugados) {
-        NotaAluguel nota = new NotaAluguel();
+    public static NotaAluguel alugar(Filme filme, Integer diasAlugados, NotaAluguel nota) {
+//        NotaAluguel nota = new NotaAluguel();
 
         if (filme.getEstoque() == 0) {
             throw new RuntimeException("O filme não tem estoque");
@@ -19,7 +19,15 @@ public class AluguelService {
 
             nota.setFilme(filme);
             nota.setDiasAlugados(diasAlugados);
-            nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * diasAlugados);
+
+            if(nota.getTipoAluguel().equals("Extendido")){
+                nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * (diasAlugados - 1));
+                nota.setPontuacao(2);
+            }else{
+                nota.setPrecoAluguelFinal(filme.getPrecoAluguel() * diasAlugados);
+                nota.setPontuacao(1);
+            }
+
             nota.setDataEntrega(calcularDataEntrega(diasAlugados));
         }
 

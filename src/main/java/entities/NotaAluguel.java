@@ -8,16 +8,20 @@ public class NotaAluguel {
     private Integer diasAlugados;
     private Date dataEntrega;
     private Double precoAluguelFinal;
+    private String tipoAluguel = "Normal";
+    private Integer pontuacao;
 
     public NotaAluguel() {
 
     }
 
-    public NotaAluguel(Filme filme, Integer diasAlugados, Date dataEntrega, Double precoAluguelFinal) {
+    public NotaAluguel(Filme filme, Integer diasAlugados, Date dataEntrega, Double precoAluguelFinal, String tipoAluguel, Integer pontuacao) {
         this.filme = filme;
         this.diasAlugados = diasAlugados;
         this.dataEntrega = dataEntrega;
         this.precoAluguelFinal = precoAluguelFinal;
+        this.tipoAluguel = tipoAluguel;
+        this.pontuacao = pontuacao;
     }
 
     public Filme getFilme() {
@@ -50,5 +54,21 @@ public class NotaAluguel {
 
     public void setPrecoAluguelFinal(Double precoAluguelFinal) {
         this.precoAluguelFinal = precoAluguelFinal;
+    }
+
+    public String getTipoAluguel() {
+        return tipoAluguel;
+    }
+
+    public void setTipoAluguel(String tipoAluguel) {
+        this.tipoAluguel = tipoAluguel;
+    }
+
+    public Integer getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(int pontuacao) {
+        this.pontuacao = pontuacao;
     }
 }
