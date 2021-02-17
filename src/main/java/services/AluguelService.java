@@ -2,7 +2,6 @@ package services;
 
 import entities.Filme;
 import entities.NotaAluguel;
-import entities.enums.TipoAluguel;
 
 import static helpers.DateMethods.calcularDataEntrega;
 

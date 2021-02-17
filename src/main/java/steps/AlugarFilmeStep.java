@@ -3,16 +3,14 @@ package steps;
 import entities.Filme;
 import entities.NotaAluguel;
 import entities.enums.TipoAluguel;
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.Então;
 import io.cucumber.java.pt.Quando;
 import org.junit.Assert;
 import services.AluguelService;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 import static helpers.DateMethods.calcularDataEntrega;
 import static helpers.DateMethods.sdfFormater;
@@ -38,6 +36,17 @@ public class AlugarFilmeStep {
         String strPrecoFormatado = strPreco.replaceAll(",", ".");
         Double preco = Double.parseDouble(strPrecoFormatado);
         filme.setPrecoAluguel(preco);
+    }
+
+    @Dado("um filme")
+    public void umFilme(DataTable dataTable) {
+        /** Map de String's por conta que as Wrapper class de estoque e preco, são
+         diferentes. (Integer e Double) */
+        Map<String, String> map = dataTable.asMap(String.class, String.class);
+        filme = new Filme();
+        filme.setEstoque(Integer.parseInt(map.get("estoque")));
+        filme.setPrecoAluguel(Double.parseDouble(map.get("preco")));
+
     }
 
     @Quando("alugar por {int} dia(s)")
