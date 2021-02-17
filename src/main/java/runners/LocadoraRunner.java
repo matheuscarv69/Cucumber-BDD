@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         features = "src/main/resources/features/AlugarFilme.feature",
         glue = "",
         tags = ("not @ignore"),
-        plugin = {"pretty", "html:target/cucumber"},
+        plugin = {"pretty", "html:target/report-tests.html"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
 
 )
