@@ -8,7 +8,7 @@ public class NotaAluguel {
     private Integer diasAlugados;
     private Date dataEntrega;
     private Double precoAluguelFinal;
-    private String tipoAluguel = "Normal";
+    private String tipoAluguel = "comum";
     private Integer pontuacao;
 
     public NotaAluguel() {

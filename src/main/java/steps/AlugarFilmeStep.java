@@ -71,12 +71,12 @@ public class AlugarFilmeStep {
         Assert.assertTrue(errors.contains("O filme não tem estoque"));
     }
 
-    @Dado("que o tipo de aluguel seja extendido")
-    public void queOTipoDeAluguelSejaExtendido() {
-        notaAluguel.setTipoAluguel("Extendido");
+    @Dado("que o tipo de aluguel seja (extendido|comum)$")
+    public void queOTipoDeAluguelSeja(String tipo) {
+        notaAluguel.setTipoAluguel(tipo);
     }
 
-    @Então("a pontuação recebida será de {int} pontos")
+    @Então("a pontuação recebida será de {int} ponto(s)")
     public void aPontuaçãoRecebidaSeráDePontos(Integer pontuacao) {
         Assert.assertEquals(pontuacao, notaAluguel.getPontuacao());
     }

@@ -23,7 +23,16 @@ Funcionalidade: Cadastrar Aluguéis
     Dado um filme com estoque de 2 unidades
     E que o preço de aluguel seja R$ 4
     E que o tipo de aluguel seja extendido
-    Quando alugar por 4 dias
-    Então o preço do aluguel será R$ 12
-    E a data de entrega será em 4 dias
+    Quando alugar por 3 dias
+    Então o preço do aluguel será R$ 8
+    E a data de entrega será em 3 dias
     E a pontuação recebida será de 2 pontos
+    
+  Cenário: Deve alugar um filme para a categoria comum
+    Dado um filme com estoque de 2 unidades
+    E que o preço de aluguel seja R$ 4
+    E que o tipo de aluguel seja comum
+    Quando alugar por 1 dias
+    Então o preço do aluguel será R$ 4
+    E a data de entrega será em 1 dia
+    E a pontuação recebida será de 1 ponto
